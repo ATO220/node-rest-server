@@ -2,10 +2,12 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const _ = require('underscore');
+const { verifyToken, verifyAdminRole } = require('../middlewares/authentication');
+
 const app = express();
 
 // GET User
-app.get('/user', (req,res) => {
+app.get('/user', verifyToken, (req,res) => {
 
     let skip = req.query.skip || 0;
     skip = Number(skip);
@@ -42,7 +44,7 @@ app.get('/user', (req,res) => {
 });
 
 // POST User
-app.post('/user', (req,res) => {
+app.post('/user', [verifyToken, verifyAdminRole], (req,res) => {
     let body = req.body;
 
     let user = new User({
@@ -68,7 +70,7 @@ app.post('/user', (req,res) => {
 });
 
 //  PUT User
-app.put('/user/:id', (req,res) => {
+app.put('/user/:id', [verifyToken, verifyAdminRole], (req,res) => {
     let body = _.pick(req.body,['name','email','img','role','estado']);
     let id = req.params.id; 
 
@@ -87,7 +89,7 @@ app.put('/user/:id', (req,res) => {
     })
     
 });
-app.delete('/user/:id', (req,res) => {
+app.delete('/user/:id', [verifyToken, verifyAdminRole], (req,res) => {
     let id = req.params.id;
     let changeStatus = { estado:false};
     User.findByIdAndUpdate(id, changeStatus,{new:true}, (err, userDB) =>{

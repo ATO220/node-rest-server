@@ -15,6 +15,20 @@ process.env.PORT = process.env.PORT || 3007;
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 //======================================= 
+//  Token expiration
+//=======================================
+// 60 segs
+// 60 mins
+// 24 hours
+// 30 days
+process.env.TOKEN_EXPIRATION = 60 * 60 * 24 * 30;
+
+//======================================= 
+//  Token SEED 
+//=======================================
+process.env.SEED = process.env.SEED || 'este-es-el-seed-desarrollo';
+
+//======================================= 
 //  DataBase
 //======================================= 
 let urlDB;
@@ -26,3 +40,8 @@ if(process.env.NODE_ENV === 'dev'){
 }
 
 process.env.URL_DB = urlDB;
+
+//=================================================
+//   Google ClientID
+//=================================================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '302673693764-ucfka2mmsciqsomkb0i4lt86kgaa9dmh.apps.googleusercontent.com';
