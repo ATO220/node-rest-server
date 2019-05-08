@@ -24,7 +24,6 @@
         xhr.open('POST', '/google');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
-        console.log('idtokeennnn', id_token);
         console.log('Signed in as: ' + xhr.responseText);
         };
         xhr.send('idtoken=' + id_token);
