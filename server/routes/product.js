@@ -81,7 +81,7 @@ app.get('/product/search/:term',(req, res) => {
     let { term } = req.params;
     let regex = new RegExp(term, 'i');
 
-    Product.find({ name : regex})
+    Product.find({ name : regex, aviable: true})
     .populate('category', 'description')
     .exec((err, productDB) => {
         if(err){
