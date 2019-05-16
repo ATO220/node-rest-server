@@ -30,6 +30,8 @@ mongoose.connect(process.env.URL_DB, {useNewUrlParser: true, useCreateIndex: tru
 });
 
 
-app.listen(port, () => {
+app.listen(port, (err) => {
+    if(err) throw new Error(err);
+    
     console.log(`Escuchando el puerto ${ port }`);
 })
